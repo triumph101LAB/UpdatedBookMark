@@ -13,10 +13,10 @@ export class Books extends Document {
     @Prop({required:true})
     description:string;
 
-    
+    /*
     @Prop({ type: Types.ObjectId, ref: 'User', required: true })
     userId: Types.ObjectId;
-
+    */
 }
 
 export const BookMarkSchema = SchemaFactory.createForClass(Books);

@@ -1,4 +1,4 @@
-import { IsString, IsEmail, IsNotEmpty } from "class-validator";
+import { IsString, IsEmail, IsNotEmpty, IsOptional } from "class-validator";
 // representing the request payload for authentication
 // this DTO will be used to validate the incoming request data for authentication
 export class AuthPayloadDto{
@@ -10,10 +10,10 @@ export class AuthPayloadDto{
     @IsString()
     @IsNotEmpty()
     password:string;
-    /*
+    
     @IsEmail()
-    @IsNotEmpty()
+    @IsOptional()
     email:string;
-*/
+
 
 }

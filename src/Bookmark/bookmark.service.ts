@@ -85,8 +85,8 @@ export class BookmarkService{
 }
     */
 
-async createBook(userId:string, data:any){
-    const book = new this.booksModel({...data, userId: new Types.ObjectId(userId)});
+async createBook(userId:string, createBookmarkDto:CreateBookmarkDto){
+    const book = new this.booksModel({...createBookmarkDto, userId: new Types.ObjectId(userId)});
     return book.save();
 }
 
@@ -97,10 +97,10 @@ async getBooks(userId: string) {
 
   
 
-  async updateBook(userId: string, bookId: string, data: any) {
+  async updateBook(userId: string, bookId: string, createBookmarkDto:CreateBookmarkDto) {
     return this.booksModel.findOneAndUpdate(
       { _id: new Types.ObjectId(bookId), userId:new Types.ObjectId(userId) },
-      data,
+      createBookmarkDto,
       { new: true }
     );
   }
