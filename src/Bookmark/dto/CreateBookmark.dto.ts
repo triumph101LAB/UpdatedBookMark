@@ -14,6 +14,8 @@ export class CreateBookmarkDto{
     @IsNotEmpty()
     @IsString()
     description:string;
+
+    
     /*
     @IsString()
     @IsNotEmpty()

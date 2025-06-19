@@ -41,7 +41,7 @@ validateUser({username,password}:AuthPayloadDto){
     */
 
 
-async signup(username: string, password:string, email:string){
+async signup(username: string, password:string, email:string, age:number){
     const findUser = await this.userModel.findOne({username});
     const FindEmail =  await this.userModel.findOne({email});
 
@@ -49,12 +49,12 @@ async signup(username: string, password:string, email:string){
     if(findUser) throw new HttpException('User already Exist',400);
 
     const hashed = await bcrypt.hash(password, 10);
-    const user = new this.userModel({username, password: hashed, email});
+    const user = new this.userModel({username, password: hashed, email, age});
 
     
     await user.save();
 
-    return { id:user._id, username: user.username};
+    return { id:user._id, username: user.username, };
 }
 
 async validateUser(username:string, password:string){
@@ -66,11 +66,11 @@ async validateUser(username:string, password:string){
     const valid = await bcrypt.compare(password,user.password);
     if(!valid) throw new HttpException("Invalid User Detail",401);
 
-    return {id: user._id, username: user.username, email:user.email};
+    return {id: user._id, username: user.username, email:user.email, age:user.age};
 }
 
 async login(user:any){
-    const payload = { username :user.username, userId: user.id, email: user.email};
+    const payload = { username :user.username, userId: user.id, email: user.email, age:user.age};
     return {access_token: this.jwtService.sign(payload)};
 }
 }

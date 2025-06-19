@@ -13,6 +13,10 @@ export class User{
     @Prop({required:false, unique:true})
     email?:string;
 
+    @Prop({required:true})
+    age:number;
+    
+
     //@Prop({unique:false})
     //email:string;
     
