@@ -19,7 +19,7 @@ export class AuthController{
     }
     @Post('signup')
     signUp(@Body() body: AuthPayloadDto){
-        const user = this.authService.signup(body.username, body.password, body.email); 
+        const user = this.authService.signup(body.username, body.password, body.email,body.age); 
         return user;
 
     }

@@ -1,7 +1,7 @@
 import { Controller, Post, Body, UseGuards, Req, Get, Patch, Delete, Param } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/guard/jwt.guarg';
 import { BookmarkService } from './bookmark.service';
-import { GetUser } from 'src/auth/decorators/auth.decorators';
+//import { GetUser } from 'src/auth/decorators/auth.decorators';
 import { UserId } from 'src/auth/decorators/userId.decorator';
 @Controller('books')
 @UseGuards(JwtAuthGuard)
@@ -18,6 +18,10 @@ export class BookmarkController {
     return this.bookmarkService.getBooks(userId);
   }
 
+  @Get(':id')
+  async getBooksById(@UserId() userId:string, @Param('id') id:string){
+    return this.bookmarkService.getBooksById(userId,id);
+  }
   @Patch(':id')
   async update(@UserId() userId:string, @Param('id') id: string, @Body() body) {
     return this.bookmarkService.updateBook(userId, id, body);
